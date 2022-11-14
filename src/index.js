@@ -10,7 +10,7 @@ const SAFESEARCH = 'true';
 const IMAGE_TYPE = 'photo';
 const ORIENTATION = 'horizontal';
 
-
+const formEl = document.querySelector('#search-form')
 const inputEl = document.querySelector('[name="searchQuery"]');
 const submitBtn = document.querySelector('[type="submit"]');
 const loadBtn = document.querySelector('[type="button"]');
@@ -34,6 +34,7 @@ async function fetchPics() {
 function onSubmit(event) {
     event.preventDefault();
     galleryEl.innerHTML = "";
+    
     page = 1;
 
     request = inputEl.value;
@@ -50,7 +51,7 @@ function onSubmit(event) {
         showResult()
             
         showLoadBtn()
-        
+        formEl.reset();
     }
 }
 
