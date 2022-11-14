@@ -8,14 +8,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #fafafa;
-  color: #212121;
+  color: #fafafa;
   line-height: 1.5;
+  position: relative;
 }
 
 img {
   display: block;
+  
+  
+  
 }
-
+/* 
 #search-box {
   font: inherit;
   padding: 8px;
@@ -44,4 +48,139 @@ img {
 
 .country-info__entry {
   font-weight: bold;
+} */
+
+.search-field {
+  background-color: #212121;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* height: 60px; */
 }
+
+.load-field {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  text-align: center;
+  background-color: #212121;
+    /* position: fixed;
+    bottom: 0;
+    left: 0; */
+    width: 100%;
+    /* min-height: 74px; */
+}
+
+.search-form {
+  /* display: block; */
+  width: 280px;
+  padding-top: 22px;
+  padding-bottom: 22px;
+  margin-left: auto;
+  margin-right: auto;
+  /* height: 60px; */
+  
+}
+
+.search-form input {
+  height: 30px;
+  border-radius: 4px;
+  
+}
+
+.search-button {
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 4px;
+  background-color: #fafafa;
+}
+
+.load-button {
+  width: 100px;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 22px;
+  margin-bottom: 22px;
+  /* margin-left: auto;
+  margin-right: auto; */
+  border-radius: 4px;
+  background-color: #fafafa;
+  color: #212121;
+}
+
+.container {
+  width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+}
+
+.gallery {
+  
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  margin-top: 84px;
+  margin-bottom: 10px;
+}
+
+.photo-card {
+  flex-basis: calc((100% - 30px) / 4);
+  border: 1px solid black;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.gallery__image {
+  max-width: 100%;
+  
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.info {
+  display: flex;
+  justify-content: space-around;
+  background-color: #212121;
+  /* height: 90px; */
+}
+
+.gallery__icon {
+  display: block;
+  fill: #fafafa;
+  stroke: #fafafa;
+}
+
+
+.info-item {
+  margin: 8px;
+  display: flex;
+  flex-basis: 70px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+}
+
+.thumb {
+  background-color: #000000;
+  height: 215px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
