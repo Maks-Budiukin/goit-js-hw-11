@@ -16,7 +16,9 @@ const submitBtn = document.querySelector('[type="submit"]');
 const loadBtn = document.querySelector('[type="button"]');
 const galleryEl = document.querySelector('.gallery');
 
-const lightbox = new SimpleLightbox('.gallery a',{ captionsData: 'alt', captionDelay: 250});
+const lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
+
+
 
 let page = 1;
 let request = '';
@@ -51,6 +53,7 @@ function onSubmit(event) {
 function onLoadMore() {
     page += 1;
     showResult();
+    
 }
 
 function showResult() {
@@ -131,3 +134,6 @@ function showLoadmoreNotify(arrLength) {
         Notify.warning("We're sorry, but you've reached the end of search results.");
     }
 }
+
+
+

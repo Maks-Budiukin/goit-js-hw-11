@@ -114,29 +114,71 @@ img {
   color: #212121;
 }
 
-.container {
-  width: 1440px;
+/* .container {
+  width: 400px;
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;
-}
+} */
+
+
+.container {
+    width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+  }
+
+    @media screen and (max-width: 768px) {
+    
+    .container {
+        width: 400px;
+      }
+    }
+        
+
+
+
 
 .gallery {
   
   display: flex;
   flex-wrap: wrap;
+  
   gap: 10px;
 
   margin-top: 84px;
   margin-bottom: 10px;
 }
 
+
+
+@media screen and (min-width: 1200px) {
+
 .photo-card {
-  flex-basis: calc((100% - 30px) / 4);
-  border: 1px solid black;
-  border-radius: 8px;
-  overflow: hidden;
+    flex-basis: calc((100% - 30px) / 4);
+
+    border: 1px solid black;
+    border-radius: 8px;
+    overflow: hidden;
+  }
 }
+    @media screen and (max-width: 768px) {
+  
+      .photo-card {
+          flex-basis: 100%;
+      
+        }
+  
+    }
+
+        
+
+
+
+
+
+
 
 .gallery__image {
   max-width: 100%;
