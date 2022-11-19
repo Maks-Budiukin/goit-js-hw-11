@@ -2,6 +2,7 @@ import './css/styles.css';
 import { Notify } from "notiflix";
 import SimpleLightbox from 'simplelightbox';
 import "simplelightbox/dist/simple-lightbox.min.css";
+import axios from 'axios';
 
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '31301300-300be7510f84e8e4ecf9762e9';
@@ -26,14 +27,6 @@ let request = '';
 submitBtn.addEventListener('click', onSubmit);
 loadBtn.addEventListener('click', onLoadMore);
 
-async function fetchPics() {
-    const response = await fetch(`${BASE_URL}?key=${API_KEY}&q=${request}&image_type=${IMAGE_TYPE}&page=${page}&per_page=${PIC_PER_PAGE}&safesearch=${SAFESEARCH}&orientation=${ORIENTATION}`);
-    if (!response.ok) {
-        throw new Error(response.status);
-    }
-    const result = await response.json();
-    return result;
-}
 
 function onSubmit(event) {
     event.preventDefault();
@@ -56,19 +49,47 @@ function onLoadMore() {
     
 }
 
-function showResult() {
-    fetchPics()
-        .then(result => {
+async function fetchPics() {
 
-            let { hits, total, totalHits } = result;
-            if (page > 1) {
-                showLoadmoreNotify(hits.length);
-            } else {
-                showSubmitNotify(totalHits, hits.length);
-                clearResultField();
+        const response = await axios.get(BASE_URL, {
+            params: {
+                key: API_KEY,
+                q: request,
+                image_type: IMAGE_TYPE,
+                page: page,
+                per_page: PIC_PER_PAGE,
+                safesearch: SAFESEARCH,
+                orientation: ORIENTATION
             }
+        })
+        const data = response.data;
+        return data;
+}
 
-            const resultEl = hits.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
+
+async function showResult() {
+    try {
+        const data = await fetchPics();
+        const resultEl = await renderMarkup(data);
+        galleryEl.insertAdjacentHTML('beforeend', resultEl);
+        lightbox.refresh();
+     
+    } catch (error) {
+        Notify.failure('Oops, something went wrong! We are working hard to fix it!');
+    }    
+}
+
+
+function renderMarkup(data) {
+        let { hits, total, totalHits } = data;
+        if (page > 1) {
+            showLoadmoreNotify(hits.length);
+        } else {
+            showSubmitNotify(totalHits, hits.length);
+            clearResultField();
+        }
+
+        const markup = hits.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
             
             
             <div class="photo-card">
@@ -95,15 +116,8 @@ function showResult() {
                 </div>
             </div>
                 `).join("");
-            
-            galleryEl.insertAdjacentHTML('beforeend', resultEl);
-            lightbox.refresh();
-            
-        })
-        .catch((error) => {
-                Notify.failure('Oops, something went wrong! We are working hard to fix it!');
-        })
-}
+        return markup;
+    }
 
 function clearResultField() {
     galleryEl.innerHTML = "";
@@ -134,6 +148,3 @@ function showLoadmoreNotify(arrLength) {
         Notify.warning("We're sorry, but you've reached the end of search results.");
     }
 }
-
-
-
